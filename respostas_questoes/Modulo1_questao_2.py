@@ -88,42 +88,45 @@ class Grafo:
 
     # DFS que retorna o ciclo do grafo
     def DFS_retorna_ciclo(self):
-        G_aux = Grafo(self.V,{}) # inicializa grafo auxiliar
-        G_ciclo = Grafo(self.V,{}) # inicializa grafo que vai guardar ciclo
+        # inicializa grafos auxiliares
+        G_aux = Grafo(self.V,{})
+        G_ciclo = Grafo(self.V,{})
 
-        nao_visitados = self.V # lista de vertices não visitados
-        
-        for v in self.V: # para cada vertice do grafo
-            if v in nao_visitados: # se não foi visitado
-                self.DFS_visit(G_ciclo, G_aux, v, nao_visitados) # chama funcao DFS_visit
+        # lista de vertices não visitados
+        nao_visitados = self.V
 
+        # para cada vertice em V não visitado
+        for v in self.V:
+            if v in nao_visitados:
+                self.DFS_visit(G_ciclo, G_aux, v, nao_visitados)
+
+        # retorna grafo com ciclo 
         return G_ciclo
 
     def DFS_visit(self, G_ciclo, G_aux, v,nao_visitados):
-        nao_visitados.remove(v) # como se torna vertice visitado retira da lista de não visitados
-        
-        # se ja foi encontrado algum ciclo no grafo
+        # tira vertice da lista de não visitados
+        nao_visitados.remove(v)
+
+        # se o grafo com ciclo ja foi preenchido então retorna
         if(G_ciclo.m > 0):
             return
 
-        # para cada vizinho de v
+        # executa para cada vizinho do vertice v
         for w in list(self.vizinhos(v)):
-            # se ainda nao foi visitado
+
+            # se vertice nao foi visitado então coloca no grafo auxiliar
             if w in nao_visitados:
-                #adiciona aresta direcional de w para v em grafo auxiliar
                 G_aux.adiciona_aresta_direcionada(w,v)
-                # chama recursivamente a funcao DFS_visit
                 self.DFS_visit(G_ciclo, G_aux, w,nao_visitados)
-            # se w ja foi visitado e aresta nao esta no grafo auxiliar então foi detectado um ciclo
-            if (w not in nao_visitados) and (not G_aux.existe_aresta(w,v)):
-                # adiciona aresta 
+
+            # se vertice ja foi visitado e aresta de v para w não foi visitado 
+            if (w not in nao_visitados) and (not G_aux.existe_aresta(w,v)) and (G_ciclo.m == 0):
                 G_ciclo.adiciona_aresta(v,w)
                 self.acha_ciclo(G_ciclo, G_aux, w, v)
 
+    # função encontra ciclo 
     def acha_ciclo(self,G_ciclo, G_aux, w, v):
-            # percorre grafo auxiliar ate encontrar vertice w e chama recursivamente a funcao
             if v != w:
-                # adiciona aresta com v com vizinho anterior
                 G_ciclo.adiciona_aresta(list(G_aux.vizinhos(v))[0],v)
                 self.acha_ciclo(G_ciclo, G_aux, w, list(G_aux.vizinhos(v))[0])
 
