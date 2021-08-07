@@ -8,6 +8,8 @@ function App() {
   const [vertex, setVertex] = useState(0);
   const [edges, setEdges] = useState(null);
   const [randomGraphStyle, setRandomStyle] = useState([]);
+  const [vertex_U, setVertex_U] = useState(0);
+  const [vertex_V, setVertex_V] = useState(0);
 
 
   function createGraph() {
@@ -15,13 +17,10 @@ function App() {
       alert("Número de vértices inválido!!!")
       return
     }
-    if (edges <= 0 || edges > 1000 || isNaN(edges)) {
-      alert("Número de arestas inválido!!!")
+    if (graph_matrix != null) {
+      // se o grafo ja existe ele apagar e cria um novo
+      setGraph_matrix(null)
       return
-    }
-    if (edges > vertex * (vertex - 1) && edges > 0) {
-      alert("Número de arestas inválido!!!\n Lembrete: Número de arestas é menor ou igual ao número de Vértices*(Vértices-1)")
-      return;
     }
 
     //Funçao de inicializar grafo aqui!!!
@@ -41,82 +40,60 @@ function App() {
     }
     setRandomStyle(array);
   }
+  
+  // função conecta nós do grafo
+  function conectVertex(vertex_U, vertex_V) {
+       let auxGraph = graph_matrix;
+  
+       if (vertex_U === vertex_V) {
+         alert("Selecione Nós Diferentes para serem conectados!!!");
+         return;
+       }
 
-  //   // function connectVertex(origin, destination) {
-  //   //   const isAlreadyConnected = verifyConnectivity(origin, destination)
-  //   //   if (isAlreadyConnected) {
-  //   //     alert("Vértices já conectados!")
-  //   //     return;
-  //   //   }
+       if (vertex_U < graph_matrix.length || vertex_V < graph_matrix.length) {
+        auxGraph[vertex_U][vertex_V] = 1;
+        auxGraph[vertex_V][vertex_U] = 1;
+        setGraph_matrix(auxGraph);
 
-  //   if (origin === destination) {
-  //     alert("Um vértice não pode se ligar a ele mesmo!")
-  //     return;
-  //   }
-
-  //   let newGraph = graph_matrix;
-  //   if (destination < graph_matrix.length) {
-  //     newGraph[origin][destination] = 1
-  //     setGraph_matrix(newGraph);
-  //     setEdgesCount(edgesCount - 1)
-  //     setDestinyVertex(0)
-  //     setOriginVertex(0)
-  //   } else {
-  //     alert("Essa posição não existe!")
-  //   }
-  // }
-
-  // function connectVertexBothDirection(origin, destination) {
-  //   let newGraph = graph_matrix;
-
-  //   if (origin === destination) {
-  //     alert("Não pode ligar nele mesmo");
-  //     return;
-  //   }
-  //   if (destination < graph_matrix.length) {
-  //     let isOriginNotConnected = !verifyConnectivity(origin, destination);
-  //     let isDestinationNotConnected = !verifyConnectivity(destination, origin);
-
-  //     if (isOriginNotConnected && isDestinationNotConnected) {
-  //       newGraph[origin][destination] = 1;
-  //       newGraph[destination][origin] = 1;
-  //       setGraph_matrix(newGraph);
-  //       setEdgesCount(edgesCount - 2);
-  //     } else if (isOriginNotConnected) {
-  //       newGraph[origin][destination] = 1;
-  //       setGraph_matrix(newGraph);
-  //       setEdgesCount(edgesCount - 1);
-  //     } else if (isDestinationNotConnected) {
-  //       newGraph[destination][origin] = 1;
-  //       setGraph_matrix(newGraph);
-  //       setEdgesCount(edgesCount - 1);
-  //     }
-  //     setDestinyVertex(0);
-  //     setOriginVertex(0);
-  //   } else {
-  //     alert("POSIÇÃO NÃO EXISTENTE");
-  //   }
-  // }
-
-  function finishGraph() {
+        setVertex_V(0);
+        setVertex_U(0);
+       } else {
+         alert("POSIÇÃO NÃO EXISTENTE");
+       }
+     }
+  
+  
+  function findShortestPath() {
     // função para executar funcionalidade de achar o menor caminho
   }
 
-  const graphInfoForm = () => (
+  const graph = () => (
+
     <div className="inputForm">
       <div>
         <h3>Qual o tamanho do seu grafo?</h3>
         <input
-          type="text"
-          placeholder="Número de Vértices"
+          value={vertex}
+          onChange={(e) => {
+            setVertex(e.target.value);
+          }}
         />
-        <button>novo</button>
+        <button onClick={createGraph}>criar</button>
       </div>
       <div>
         <h3>Adicione as arestas</h3>
-        <input className="aresta" />
-        <input className="aresta" />
-        <button>adicionar</button>
+        <input className="aresta" 
+          value={vertex_U}
+          onChange={(e) => {
+            setVertex_U(e.target.value);
+          }}/>
+        <input className="aresta" 
+          value={vertex_V}
+          onChange={(e) => {
+            setVertex_V(e.target.value);
+          }}/>
+        <button
+          onClick={conectVertex}>adicionar</button>
       </div>
     </div>
   );
@@ -127,7 +104,7 @@ function App() {
         <h3>Ache o menor caminho!!!</h3>
         <input className="aresta" />
         <input className="aresta" />
-        <button>procurar</button>
+        <button onClick={findShortestPath}>procurar</button>
       </div>
     </div>
   );
@@ -195,7 +172,7 @@ function App() {
       <div className="header">
         <h1>Graphs is fun!</h1>
       </div>
-      {graphInfoForm()}
+      {graph()}
       {graphSearch()}
       {renderGraph()}
     </div>
