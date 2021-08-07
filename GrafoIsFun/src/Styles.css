@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #6BAECB;
+  background: #BFC9FF;
 }
 
 h3 {
@@ -20,7 +20,7 @@ h3 {
   align-items: center;
   letter-spacing: -0.017em;
 
-  color: #FFFFFF;
+  color: #000;
 
 }
 
@@ -52,7 +52,7 @@ input {
   display: flex;
   align-items: center;
   flex-direction: column;
-  color: white;
+  color: BFC9FF;
   margin: 50px;
 }
 
@@ -63,7 +63,7 @@ input {
   padding: 10px;
   align-items: center;
 
-  background: #6BAECB;
+  background: #BFC9FF;
 }
 
 .inputSearch{
@@ -73,7 +73,7 @@ input {
   padding: 10px;
   align-items: center;
 
-  background: #6BAECB;
+  background: #BFC9FF;
 }
 
 .graph-container {
@@ -84,6 +84,10 @@ input {
 }
 
 .graphView {
+  width: 918px;
+  height: 670px;
   border-style: solid;
   border-width: 1;
+  color: #000;
+  overflow: hidden;
 }

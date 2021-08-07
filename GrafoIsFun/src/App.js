@@ -4,7 +4,7 @@ import { initGraph } from './utils/createGraph';
 import { Stage, Layer, Arrow, Circle, Text } from "react-konva";
 
 function App() {
-  const [graph_matrix, setGraph_matrix] = useState(null);
+  const [graph_List, setGraph_List] = useState(null);
   const [vertex, setVertex] = useState(0);
   const [edges, setEdges] = useState(null);
   const [randomGraphStyle, setRandomStyle] = useState([]);
@@ -17,15 +17,17 @@ function App() {
       alert("Número de vértices inválido!!!")
       return
     }
-    if (graph_matrix != null) {
+    if (graph_List != null) {
       // se o grafo ja existe ele apagar e cria um novo
-      setGraph_matrix(null)
+      setGraph_List(null)
       return
     }
-
+    
     //Funçao de inicializar grafo aqui!!!
     const graph = initGraph(vertex);
-    setGraph_matrix(graph);
+    console.log("criado")
+    console.log(graph)
+    setGraph_List(graph);
     generateGraphStyle();
   }
 
@@ -42,19 +44,19 @@ function App() {
   }
   
   // função conecta nós do grafo
-  function conectVertex(vertex_U, vertex_V) {
-       let auxGraph = graph_matrix;
+  function conectGraph() {
+       let auxGraph = graph_List;
   
        if (vertex_U === vertex_V) {
          alert("Selecione Nós Diferentes para serem conectados!!!");
          return;
-       }
+       }  
 
-       if (vertex_U < graph_matrix.length || vertex_V < graph_matrix.length) {
-        auxGraph[vertex_U][vertex_V] = 1;
-        auxGraph[vertex_V][vertex_U] = 1;
-        setGraph_matrix(auxGraph);
-
+       if (vertex_U-1 < graph_List.length || vertex_V-1 < graph_List.length) {
+        auxGraph[vertex_U-1].push(vertex_V-1);
+        auxGraph[vertex_V-1].push(vertex_U-1);
+        setGraph_List(auxGraph);
+        console.log(auxGraph);
         setVertex_V(0);
         setVertex_U(0);
        } else {
@@ -92,8 +94,7 @@ function App() {
           onChange={(e) => {
             setVertex_V(e.target.value);
           }}/>
-        <button
-          onClick={conectVertex}>adicionar</button>
+        <button onClick={conectGraph}>adicionar</button>
       </div>
     </div>
   );
@@ -158,7 +159,7 @@ function App() {
 
   const renderGraph = () => (
     <div className="graph-container">
-      <Stage width={918} height={670} className="graphView">
+      <Stage className="graphView">
         {/* <Layer>
           {renderEdges(graph_matrix)}
           {renderVertex(graph_matrix)}

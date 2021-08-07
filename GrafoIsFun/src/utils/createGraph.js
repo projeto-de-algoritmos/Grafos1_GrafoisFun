@@ -1,10 +1,7 @@
 export function initGraph(vertex) {
-    let initialMatrix = []
+    let initialList = []
     for (let i = 0; i < vertex; i++) {
-        initialMatrix.push([]);
-        for (let j = 0; j < vertex; j++) {
-            initialMatrix[i].push(999)
-        }
+        initialList.push([]);
     }
-    return initialMatrix;
+    return initialList;
 }
