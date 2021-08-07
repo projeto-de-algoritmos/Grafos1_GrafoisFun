@@ -1,15 +1,19 @@
 import './Styles.css';
 import React, { useState } from 'react';
 import { initGraph } from './utils/createGraph';
+import { BFS } from './utils/bfs';
 import { Stage, Layer, Arrow, Circle, Text } from "react-konva";
 
 function App() {
   const [graph_List, setGraph_List] = useState(null);
+  const [graph_menor, setGraph_menor] = useState(null);
   const [vertex, setVertex] = useState(0);
   const [edges, setEdges] = useState(null);
   const [randomGraphStyle, setRandomStyle] = useState([]);
   const [vertex_U, setVertex_U] = useState(0);
   const [vertex_V, setVertex_V] = useState(0);
+  const [vertexFind_U, setVertexFind_U] = useState(0);
+  const [vertexFind_V, setVertexFind_V] = useState(0);
 
 
   function createGraph() {
@@ -28,6 +32,7 @@ function App() {
     console.log("criado")
     console.log(graph)
     setGraph_List(graph);
+    setGraph_menor(null);
     generateGraphStyle();
   }
 
@@ -52,13 +57,16 @@ function App() {
          return;
        }  
 
-       if (vertex_U-1 < graph_List.length || vertex_V-1 < graph_List.length) {
-        auxGraph[vertex_U-1].push(vertex_V-1);
-        auxGraph[vertex_V-1].push(vertex_U-1);
+       if (vertex_U < graph_List.length || vertex_V < graph_List.length) {
+        auxGraph[vertex_U].push(vertex_V);
+        auxGraph[vertex_V].push(vertex_U);
+
         setGraph_List(auxGraph);
         console.log(auxGraph);
+
         setVertex_V(0);
         setVertex_U(0);
+
        } else {
          alert("POSIÇÃO NÃO EXISTENTE");
        }
@@ -67,6 +75,18 @@ function App() {
   
   function findShortestPath() {
     // função para executar funcionalidade de achar o menor caminho
+    if(vertexFind_U === vertexFind_V){
+      alert("Selecione nós diferentes a serem para busca de menor caminho");
+    }
+
+    if (vertexFind_U < graph_List.length || vertexFind_V < graph_List.length){
+      setGraph_menor(BFS(graph_List, vertexFind_U, vertexFind_V));
+      console.log(BFS(graph_List, vertexFind_U, vertexFind_V))
+    } else {
+      alert("POSIÇÃO NÃO EXISTENTE");
+    }
+
+
   }
 
   const graph = () => (
@@ -103,8 +123,17 @@ function App() {
     <div className="inputSearch">
       <div>
         <h3>Ache o menor caminho!!!</h3>
-        <input className="aresta" />
-        <input className="aresta" />
+        <input className="aresta" 
+        value={vertexFind_U}
+        onChange={(e) => {
+          setVertexFind_U(e.target.value);
+        }}/>
+
+        <input className="aresta" 
+        value={vertexFind_V}
+        onChange={(e) => {
+          setVertexFind_V(e.target.value);
+        }}/>
         <button onClick={findShortestPath}>procurar</button>
       </div>
     </div>

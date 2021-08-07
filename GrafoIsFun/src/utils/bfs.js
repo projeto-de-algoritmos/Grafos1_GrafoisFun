@@ -1,21 +1,34 @@
-function bfs(graph, source) {
-    var queue = [{ vertex: source, count: 0 }],
-        visited = { source: true },
-        tail = 0;
-    while (tail < queue.length) {
-        var u = queue[tail].vertex,
-            count = queue[tail++].count;  // Pop a vertex off the queue.
-        print('distance from ' + source + ' to ' + u + ': ' + count);
-        graph.neighbors[u].forEach(function (v) {
-            if (!visited[v]) {
-                visited[v] = true;
-                queue.push({ vertex: v, count: count + 1 });
+import { initGraph } from './createGraph';
+
+export function BFS(graph_List, u, v) {
+    const graphAux = initGraph(graph_List.length);
+
+    const queue = [];
+    queue.push(u);
+
+    const visitado = [];
+    visitado[u] = true;
+
+    while(queue.length){
+        let vertice = queue.shift();
+
+        if(vertice === v){
+            return graphAux;
+        }
+
+        for(let i=0; i < graph_List[vertice].length; i++) {
+            if(!visitado[graph_List[vertice][i]]){
+                visitado[graph_List[vertice][i]] = true;
+                queue.push(graph_List[vertice][i]);
+                graphAux[vertice].push(graph_List[vertice][i]);
             }
-        });
+        }
     }
+
+    return graphAux;
 }
 
-function shortestPath(graph, source, target) {
+/*function shortestPath(graph, source, target) {
     if (source == target) {   // Delete these four lines if
         print(source);          // you want to look for a cycle
         return;                 // when the source is equal to
@@ -49,4 +62,4 @@ function shortestPath(graph, source, target) {
         }
     }
     print('there is no path from ' + source + ' to ' + target);
-}
+}*/
