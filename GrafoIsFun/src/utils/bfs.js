@@ -13,7 +13,7 @@ export function BFS(graph_List, u, v) {
         let vertice = queue.shift();
 
         if(vertice === v){
-            return menor_caminho(graphAux, u, v);
+            return menor_caminho(graphAux, graph_List, u, v);
         }
 
         for(let i=0; i < graph_List[vertice].length; i++) {
@@ -25,11 +25,11 @@ export function BFS(graph_List, u, v) {
         }
     }
 
-    return menor_caminho(graphAux, u, v);
+    return menor_caminho(graphAux, graph_List, u, v);
 }
 
-function menor_caminho(graphAux, u, v){
-    const graph = initGraph(graphAux);
+function menor_caminho(graphAux, graph_List, u, v){
+    const graph = initGraph(graph_List.length);
     while(u != v){
         graph[u] = graphAux[u];
         u = graphAux[u];
