@@ -26,7 +26,7 @@ function App() {
       setGraph_List(null)
       return
     }
-    
+
     //Funçao de inicializar grafo aqui!!!
     const graph = initGraph(vertex);
     console.log("criado")
@@ -47,43 +47,43 @@ function App() {
     }
     setRandomStyle(array);
   }
-  
+
   // função conecta nós do grafo
   function conectGraph() {
-       let auxGraph = graph_List;
-  
-       if (vertex_U === vertex_V) {
-         alert("Selecione Nós Diferentes para serem conectados!!!");
-         return;
-       }  
-       if(graph_List[vertex_U].includes(vertex_V) || graph_List[vertex_V].includes(vertex_U)){
-        alert("Aresta já existente!!!");
-        return;
-       }
+    let auxGraph = graph_List;
 
-       if (vertex_U < graph_List.length || vertex_V < graph_List.length) {
-        auxGraph[vertex_U].push(vertex_V);
-        auxGraph[vertex_V].push(vertex_U);
+    if (vertex_U === vertex_V) {
+      alert("Selecione Nós Diferentes para serem conectados!!!");
+      return;
+    }
+    if (graph_List[vertex_U].includes(vertex_V) || graph_List[vertex_V].includes(vertex_U)) {
+      alert("Aresta já existente!!!");
+      return;
+    }
 
-        setGraph_List(auxGraph);
-        console.log(auxGraph);
+    if (vertex_U < graph_List.length || vertex_V < graph_List.length) {
+      auxGraph[vertex_U].push(vertex_V);
+      auxGraph[vertex_V].push(vertex_U);
 
-        setVertex_V(0);
-        setVertex_U(0);
+      setGraph_List(auxGraph);
+      console.log(auxGraph);
 
-       } else {
-         alert("POSIÇÃO NÃO EXISTENTE");
-       }
-     }
-  
-  
+      setVertex_V(0);
+      setVertex_U(0);
+
+    } else {
+      alert("POSIÇÃO NÃO EXISTENTE");
+    }
+  }
+
+
   function findShortestPath() {
     // função para executar funcionalidade de achar o menor caminho
-    if(vertexFind_U === vertexFind_V){
+    if (vertexFind_U === vertexFind_V) {
       alert("Selecione nós diferentes a serem para busca de menor caminho");
     }
 
-    if (vertexFind_U < graph_List.length || vertexFind_V < graph_List.length){
+    if (vertexFind_U < graph_List.length || vertexFind_V < graph_List.length) {
       setGraph_menor(BFS(graph_List, vertexFind_U, vertexFind_V));
       console.log(BFS(graph_List, vertexFind_U, vertexFind_V))
     } else {
@@ -108,16 +108,16 @@ function App() {
       </div>
       <div>
         <h3>Adicione as arestas</h3>
-        <input className="aresta" 
+        <input className="aresta"
           value={vertex_U}
           onChange={(e) => {
             setVertex_U(e.target.value);
-          }}/>
-        <input className="aresta" 
+          }} />
+        <input className="aresta"
           value={vertex_V}
           onChange={(e) => {
             setVertex_V(e.target.value);
-          }}/>
+          }} />
         <button onClick={conectGraph}>adicionar</button>
       </div>
     </div>
@@ -127,17 +127,17 @@ function App() {
     <div className="inputSearch">
       <div>
         <h3>Ache o menor caminho!!!</h3>
-        <input className="aresta" 
-        value={vertexFind_U}
-        onChange={(e) => {
-          setVertexFind_U(e.target.value);
-        }}/>
+        <input className="aresta"
+          value={vertexFind_U}
+          onChange={(e) => {
+            setVertexFind_U(e.target.value);
+          }} />
 
-        <input className="aresta" 
-        value={vertexFind_V}
-        onChange={(e) => {
-          setVertexFind_V(e.target.value);
-        }}/>
+        <input className="aresta"
+          value={vertexFind_V}
+          onChange={(e) => {
+            setVertexFind_V(e.target.value);
+          }} />
         <button onClick={findShortestPath}>procurar</button>
       </div>
     </div>

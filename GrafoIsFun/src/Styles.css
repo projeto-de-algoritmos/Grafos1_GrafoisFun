@@ -65,7 +65,7 @@ input {
   display: flex;
   align-items: center;
   flex-direction: column;
-  color: BFC9FF;
+  color: #BFC9FF;
   margin: 50px;
 }
 
@@ -103,4 +103,15 @@ input {
   border-width: 1;
   color: #000;
   overflow: hidden;
+}
+
+.upperGraphButtons {
+  display: flex;
+  justify-content: row;
+}
+
+.renderGraphButton {
+  width: 80px;
+  height: 40px;
+  display: flex;
 }
