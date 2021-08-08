@@ -56,6 +56,10 @@ function App() {
          alert("Selecione Nós Diferentes para serem conectados!!!");
          return;
        }  
+       if(graph_List[vertex_U].includes(vertex_V) || graph_List[vertex_V].includes(vertex_U)){
+        alert("Aresta já existente!!!");
+        return;
+       }
 
        if (vertex_U < graph_List.length || vertex_V < graph_List.length) {
         auxGraph[vertex_U].push(vertex_V);

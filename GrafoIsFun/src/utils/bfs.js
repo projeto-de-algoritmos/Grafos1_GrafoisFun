@@ -13,7 +13,7 @@ export function BFS(graph_List, u, v) {
         let vertice = queue.shift();
 
         if(vertice === v){
-            return graphAux;
+            return menor_caminho(graphAux, u, v);
         }
 
         for(let i=0; i < graph_List[vertice].length; i++) {
@@ -25,9 +25,17 @@ export function BFS(graph_List, u, v) {
         }
     }
 
-    return graphAux;
+    return menor_caminho(graphAux, u, v);
 }
 
+function menor_caminho(graphAux, u, v){
+    const graph = initGraph(graphAux);
+    while(u != v){
+        graph[u] = graphAux[u];
+        u = graphAux[u];
+    }
+    return graph;
+}
 /*function shortestPath(graph, source, target) {
     if (source == target) {   // Delete these four lines if
         print(source);          // you want to look for a cycle
