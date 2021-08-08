@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #BFC9FF;
+  background: #DDE2FF;
 }
 
 h3 {
@@ -28,24 +28,37 @@ button {
   width: 70px;
   height: 28px;
 
-  background: #FFFFFF;
-  border: 1px solid #000000;
-  box-sizing: border-box;
+  border-radius: 5px;
+
+  background: #376275;
   margin: 5px;
+
+  text-align: center; /* centraliza o texto */
+  font-family:bold; /* fonte */
+  font-size: 16px;  /* tamanho da fonte */
+  color: white; /* cor fonte */ 
 }
 
 .aresta{
   width: 46px;
   height: 28px;
   margin: 3px;
-  background: #FFFFFF;
+  border-radius: 5px;
+  border: 2px solid;
+  box-sizing: border-box;
+  
+  background-color: white;
 }
 
 input {
   width: 125px;
   height: 28px;
 
-  background: #FFFFFF;
+  background-color: white;
+  margin: 3px;
+  border-radius: 5px;
+  border: 2px solid;
+  box-sizing: border-box;
 }
 
 .header {
@@ -63,7 +76,7 @@ input {
   padding: 10px;
   align-items: center;
 
-  background: #BFC9FF;
+  background: #DDE2FF;
 }
 
 .inputSearch{
@@ -73,7 +86,7 @@ input {
   padding: 10px;
   align-items: center;
 
-  background: #BFC9FF;
+  background: #DDE2FF;
 }
 
 .graph-container {
