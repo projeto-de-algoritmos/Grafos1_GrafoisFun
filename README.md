@@ -18,8 +18,7 @@ Neste será possível determinar o menor caminho possível entre dois vértices.
 Adicione 3 ou mais screenshots do projeto em funcionamento.
 
 ## Instalação 
-**Linguagem**: JavaScript<br>
-**Framework**: ReactJS<br>
+**Linguagem**: Python<br>
 
 É necessário possuir os gerenciadores de pacotes JS (Yarn ou NPM) e um navegador de internet
 
