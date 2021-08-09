@@ -30,7 +30,7 @@ export function BFS(graph_List, u, v) {
 
 function menor_caminho(graphAux, graph_List, u, v){
     const graph = initGraph(graph_List.length);
-    while(u != v){
+    while(u !== v && graph_List[u] !== null){
         graph[u] = graphAux[u];
         u = graphAux[u];
     }

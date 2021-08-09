@@ -14,6 +14,8 @@ function App() {
   const [vertex_V, setVertex_V] = useState(0);
   const [vertexFind_U, setVertexFind_U] = useState(0);
   const [vertexFind_V, setVertexFind_V] = useState(0);
+  const [isVertex, setIsVertex] = useState(false);
+  const [isEdges, setIsEdges] = useState(false);
 
 
   function createGraph() {
@@ -34,14 +36,16 @@ function App() {
     setGraph_List(graph);
     setGraph_menor(null);
     generateGraphStyle();
+    setIsVertex(true);
   }
 
   const generateGraphStyle = (vertex) => {
     const array = [];
     for (let i = 0; i < vertex; i++) {
       array.push({
-        top: Math.floor(Math.random() * 800),
-        left: Math.floor(Math.random() * 800),
+        top: Math.floor(Math.random() * 900),
+        left: Math.floor(Math.random() * 600
+        ),
         position: "absolute",
       })
     }
@@ -73,7 +77,9 @@ function App() {
 
     } else {
       alert("POSIÇÃO NÃO EXISTENTE");
+      return;
     }
+    setIsEdges(true);
   }
 
 
@@ -143,63 +149,63 @@ function App() {
     </div>
   );
 
-  // const renderEdges = (graph) => {
-  //   const connectedEdges = [];
+   const renderEdges = (_graph) => {
+     const connectedEdges = [];
 
-  //   for (let i = 0; i < vertex; i++) {
-  //     for (let j = 0; j < vertex; j++) {
-  //       if (graph[i][j] === 1) {
-  //         connectedEdges.push(
-  //           <Arrow
-  //             points={[
-  //               randomGraphStyle[i].left,
-  //               randomGraphStyle[i].top,
-  //               randomGraphStyle[j].left,
-  //               randomGraphStyle[j].top,
-  //             ]}
-  //             fill="black"
-  //             stroke="black"
-  //           />
-  //         );
-  //       }
-  //     }
-  //   }
-  //   return connectedEdges;
-  // };
+     for (let i = 0; i < vertex; i++) {
+       for (let j = 0; j < graph_List[i].length; j++) {
+          connectedEdges.push(
+            <Arrow
+              points={[
+                randomGraphStyle[i].left,
+                randomGraphStyle[i].top,
+                randomGraphStyle[j].left,
+                randomGraphStyle[j].top,
+              ]}
+              fill="black"
+              stroke="black"
+            />
+          );
+         
+       }
+     }
+     return connectedEdges;
+   };
 
-  // const renderVertex = (graph) => {
-  //   const vertexes = graph.map((vertex, i) => (
-  //     <>
-  //       <Circle
-  //         radius={5}
-  //         x={randomGraphStyle[i].left}
-  //         y={randomGraphStyle[i].top}
-  //         stroke="black"
-  //         fill="black"
-  //       />
-  //       <Text
-  //         x={randomGraphStyle[i].left - 3}
-  //         y={randomGraphStyle[i].top + 10}
-  //         text={i}
-  //         fontSize={20}
-  //         fontStyle="bold"
-  //       />
-  //     </>
-  //   ));
+   const renderVertex = (graph) => {
+     const vertexes = graph.map((vertex,i) => (
+       <>
+         <Circle
+           radius={5}
+           x={randomGraphStyle[i].left}
+           y={randomGraphStyle[i].top}
+           stroke="black"
+           fill="black"
+         />
+         <Text
+           x={randomGraphStyle[i].left - 3}
+           y={randomGraphStyle[i].top + 10}
+           text={i}
+           fontSize={20}
+           fontStyle="bold"
+         />
+       </>
+     ));
 
-  //   return vertexes;
-  // };
+     return vertexes;
+   };
 
   const renderGraph = () => (
     <div className="graph-container">
       <Stage className="graphView">
-        {/* <Layer>
-          {renderEdges(graph_matrix)}
-          {renderVertex(graph_matrix)}
-        </Layer> */}
+        { <Layer>
+          {isEdges && renderEdges(graph_List)}
+          {isVertex && renderVertex(graph_List)}
+        </Layer>}
       </Stage>
     </div>
   );
+
 
   return (
     <div>
