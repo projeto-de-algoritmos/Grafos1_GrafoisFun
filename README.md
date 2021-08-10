@@ -20,16 +20,23 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 ## Instalação 
 **Linguagem**: Python<br>
 
-É necessário possuir os gerenciadores de pacotes JS (Yarn ou NPM) e um navegador de internet
+É necessário possuir o python instalado na sua máquina e o jupyter
 
 ### Passos para instalação
-  *  1 -> clonar repositório usando git clone https://github.com/projeto-de-algoritmos/Grafos1_GrafoisFun/
-  *  2 -> Navegar para a pasta GrafoIsFun
-  *  3 -> Executar o comando _yarn_
+  *  1 -> Clonar repositório usando git clone https://github.com/projeto-de-algoritmos/Grafos1_GrafoisFun/
+  *  2 -> Instalar o python e o jupyter notebook
+  *  3 -> Executar o comando jupyter-notebook em seu terminal
+  *  4 -> Navegar para a pasta onde o projeto foi clonado
+  *  5 -> Instalar biblioteca _Igraph_ com o gerenciador de pacotes python (_pip install python-igraph_)
+  *  6 -> Executar o projeto com o Jupyter Notebook 
 
 
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+Como mencionado antes, GraphIsFun é projeto com o objetivo de mostrar uma aplicação de grafos no contexto do mundo real.
+Para usá-lo, o usuário decide quantos vértices o grafo terá e quais serão suas arestas.
+Depois iniciaremos uma busca em largura. O usuário decide por qual vértice essa busca será feita.
+Agora é hora de procurar o menor caminho. O usuario digitará dois pontos conectados e o programa irá determinar o menor caminho entre eles.
+Depois de exibido os resultados da busca em largura e do menor caminho entre dois vértices, ainda será mostrado o menor caminho entre dois vértices utilizando busca em profundidade.
 
 ## Outros 
 Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
