@@ -15,10 +15,10 @@ Muitas vezes nos encontramos em situações onde queremos chegar em algum lugar,
 Neste será possível determinar o menor caminho possível entre dois vértices.
 
 ## Screenshots
-<img src="/images/BFS.png" alt="Github" width="100"/>
-<img src="/images/DFS.png" alt="Github" width="100"/>
-<img src="/images/MenorCaminho.png" alt="Github" width="100"/>
-<img src="/images/MeuGrafo.png" alt="Github" width="100"/>
+<img src="/images/BFS.png" alt="Github" width="600"/>
+<img src="/images/DFS.png" alt="Github" width="600"/>
+<img src="/images/MenorCaminho.png" alt="Github" width="600"/>
+<img src="/images/MeuGrafo.png" alt="Github" width="600"/>
 
 ## Instalação 
 **Linguagem**: Python<br>
